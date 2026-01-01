@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Editor Portfolio</title>
+    <!-- Link to Google Fonts for a cinematic font like Cinzel or similar -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Reset default margins and paddings for consistency */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling: Dark theme with black background */
+        body {
+            font-family: 'Roboto', sans-serif; /* Clean, modern font for body text */
+            background-color: #000; /* Pure black background */
+            color: #e0e0e0; /* Light gray text for readability */
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Header styling: Fixed navigation bar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif; /* Cinematic font for name */
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease; /* Smooth color change on hover */
+        }
+
+        nav ul li a:hover {
+            color: #fff; /* White on hover */
+        }
+
+        /* Hero section: Full-screen with name, tagline, and button */
+        #hero {
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #000 0%, #333 100%); /* Dark gradient for cinematic feel */
+            position: relative;
+        }
+
+        #hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out; /* Smooth fade-in animation */
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s both; /* Delayed animation */
+        }
+
+        #hero .btn {
+            background-color: #e0e0e0;
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+            animation: fadeInUp 1s ease-out 1s both; /* Further delayed */
+        }
+
+        #hero .btn:hover {
+            background-color: #fff;
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        /* General section styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #fff;
+        }
+
+        /* Showreel section: YouTube embed */
+        #showreel {
+            text-align: center;
+        }
+
+        #showreel iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Services section: Grid layout for services */
+        #services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service {
+            background-color: #222; /* Dark gray card */
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover */
+        }
+
+        .service:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .service h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        /* Portfolio section: Grid of video thumbnails */
+        #portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            opacity: 0.8;
+        }
+
+        .portfolio-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .portfolio-item .overlay a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        /* About section: Text about the editor */
+        #about {
+            text-align: center;
+        }
+
+        #about p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Testimonials section: Quotes in a grid */
+        #testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background-color: #222;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .testimonial blockquote {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial cite {
+            font-weight: 500;
+        }
+
+        /* Contact section: Links to WhatsApp, Instagram, Email */
+        #contact {
+            text-align: center;
+        }
+
+        #contact .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        #contact a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        #contact a:hover {
+            color: #fff;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #111;
+            color: #888;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            #hero p {
+                font-size: 1.2rem;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            #contact .contact-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <h1>John Doe</h1> <!-- Replace with actual name -->
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#showreel">Showreel</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>John Doe</h1> <!-- Replace with actual name -->
+        <p>Professional Video Editor | Crafting Cinematic Stories</p>
+        <a href="#contact" class="btn">Hire Me</a>
+    </section>
+
+    <!-- Showreel Section -->
+    <section id="showreel">
+        <h2>My Showreel</h2>
+        <!-- Replace with actual YouTube embed URL -->
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>Services</h2>
+        <div class="service">
+            <h3>Reels</h3>
+            <p>Short, engaging video reels for social media platforms.</p>
+        </div>
+        <div class="service">
+            <h3>YouTube Videos</h3>
+            <p>Full-length video editing for YouTube content creators.</p>
+        </div>
+        <div class="service">
+            <h3>Color Grading</h3>
+            <p>Professional color correction and grading to enhance visuals.</p>
+        </div>
+        <div class="service">
+            <h3>Motion Graphics</h3>
+            <p>Dynamic motion graphics and animations for your projects.</p>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <!-- Placeholder thumbnails; replace with actual images and links -->
+        <div class="portfolio-item">
+            <img src="https://via.placeholder.com/300x200/333/fff?text=Video+1" alt="Video 1">
+            <div class="overlay">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Watch Video</a>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="https://via.placeholder.com/300x200/333/fff?text=Video+2" alt="Video 2">
+            <div class="overlay">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Watch Video</a>
+            </div>
+        </div>
+        <div class="portfolio-item">
+            <img src="https://via.placeholder.com/300x200/333/fff?text=Video+3" alt="Video 3">
+            <div class="overlay">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Watch Video</a>
+            </div>
+        </div>
+        <!-- Add more as needed -->
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I am a freelance video editor with over 5 years of experience in crafting compelling visual stories. From short reels to full-length documentaries, I specialize in bringing your vision to life with precision and creativity. Let's collaborate to make your next project unforgettable.</p>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>Client Testimonials</h2>
+        <div class="testimonial">
+            <blockquote>"John's editing skills are top-notch. He transformed our raw footage into a cinematic masterpiece."</blockquote>
+            <cite>- Client A</cite>
+        </div>
+        <div class="testimonial">
+            <blockquote>"Highly professional and creative. Would recommend to anyone needing video editing services."</blockquote>
+            <cite>- Client B</cite>
+        </div>
+        <div class="testimonial">
+            <blockquote>"Fast turnaround and excellent communication. A pleasure to work with."</blockquote>
+            <cite>- Client C</cite>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Ready to start your project? Get in touch!</p>
+        <div class="contact-links">
+            <a href="https://wa.me/1234567890" target="_blank">WhatsApp</a> <!-- Replace with actual number -->
+            <a href="https://instagram.com/johndoe" target="_blank">Instagram</a> <!-- Replace with actual handle -->
+            <a href="mailto:john@example.com">Email</a> <!-- Replace with actual email -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 John Doe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for smooth scrolling to sections
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                const targetId = this.getAttribute('href'); // Get the target section ID
+                const targetSection = document.querySelector(targetId); // Find the target element
+                targetSection.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to it
+            });
+        });
+
+        // Optional: Add more JS for animations if needed, e.g., using Intersection Observer for fade-ins
+        // For simplicity, we're using CSS animations. This can be expanded.
+    </script>
+</body>
+</html>
